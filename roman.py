@@ -15,7 +15,9 @@ class Roman:
     valid_symbol["M"] = 1000
 
     def __init__(self, value):
-
+        """
+        Can construct Roman number from string(with I,V,X,L,C,D and M inside) or with "classic" number
+        """
         if type(value) is str:
             self.roman = value
             self.numeric = self.roman_to_numeric(value)
@@ -24,14 +26,26 @@ class Roman:
             self.roman = self.numeric_to_roman(value)
 
     def __str__(self):
-        return "{0}".format(self.roman)
+        return "(" + self.roman + "," + str(self.numeric) + ")"
 
-    def __eq__(self,other): return self.numeric == other.numeric
-    def __lt__(self,other): return self.numeric < other.numeric
-    def __le__(self,other): return self.numeric <= other.numeric
-    def __ne__(self,other): return self.numeric != other.numeric
-    def __gt__(self,other): return self.numeric > other.numeric
-    def __ge__(self,other): return self.numeric >= other.numeric
+    def __eq__(self,other): 
+        assert type(other) is Roman
+        return self.numeric == other.numeric
+    def __lt__(self,other):
+        assert type(other) is Roman
+        return self.numeric < other.numeric
+    def __le__(self,other):
+        assert type(other) is Roman
+        return self.numeric <= other.numeric
+    def __ne__(self,other):
+        assert type(other) is Roman
+        return self.numeric != other.numeric
+    def __gt__(self,other):
+        assert type(other) is Roman
+        return self.numeric > other.numeric
+    def __ge__(self,other):
+        assert type(other) is Roman
+        return self.numeric >= other.numeric
 
     def __add__(self,other):
         assert type(other) is Roman
@@ -39,7 +53,7 @@ class Roman:
         return Roman(val_add)
 
     def __sub__(self,other):
-        assert type(other) is Romans
+        assert type(other) is Roman
         assert self.numeric > other.numeric
         val_add = self.numeric - other.numeric
         return Roman(val_add)
@@ -51,7 +65,19 @@ class Roman:
             val_add = self.numeric * other
         return Roman(val_add)
 
+    def __rmul__(self, other):
+        if type(other) is Roman:
+            val_add = self.numeric * other.numeric
+        elif type(other) is int:
+            val_add = self.numeric * other
+        return Roman(val_add)
+
     def validate_value(self,value):
+        """
+        Validate if a string is a valid roman number:
+        Can only contains valid symbol(I,V,X,L,C,D,M)
+        Can not contain more than 3 I or X or C in a row or more than 1 V or L or D in a row
+        """
         for i,elem in enumerate(value):
             if elem not in Roman.valid_symbol.keys():
                 raise ValueError("Not a valid roman number, contain invalid symbol")
@@ -80,7 +106,9 @@ class Roman:
                 num-=temp_val
                 temp_val = 0
             else:
+                num+=temp_val
                 num+=Roman.valid_symbol[c]
+                temp_val = 0
         num+=temp_val
         return num
 
@@ -117,46 +145,6 @@ class Roman:
             roman,val = self.compute_roman(val,elem)
             r+= roman
         return r
-# IIIVI
-# Test cases
-# 2450
-# MMCDL
-# 2510
-# MMDX
-# 2019
-# MMXIX
-testN1 = Roman(123)
-print(testN1)
 
+#if __name__ == "__main__":
 
-#testbug = Roman("IIIVIII")
-#test4error = Roman("IIII")
-#testError = Roman("EDE")
-
-assert 1 == Roman("I").numeric
-assert 2 == Roman("II").numeric
-assert 3 == Roman("III").numeric
-assert 4 == Roman("IV").numeric
-assert 5 == Roman("V").numeric
-assert 6 == Roman("VI").numeric
-assert 7 == Roman("VII").numeric
-assert 8 == Roman("VIII").numeric
-assert 9 == Roman("IX").numeric
-assert 10 == Roman("X").numeric
-assert 11 == Roman("XI").numeric
-assert 12 == Roman("XII").numeric
-assert 13 == Roman("XIII").numeric
-assert 14 == Roman("XIV").numeric
-assert 15 == Roman("XV").numeric
-assert 16 == Roman("XVI").numeric
-assert 17 == Roman("XVII").numeric
-assert 18 == Roman("XVIII").numeric
-assert 19 == Roman("XIX").numeric
-assert 20 == Roman("XX").numeric
-
-
-assert Roman("II") + Roman("II") == Roman("IV")
-
-assert Roman("II") * Roman("II") == Roman("IV")
-
-assert Roman("D") + Roman("D") == Roman("M")
