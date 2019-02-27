@@ -3,16 +3,19 @@
 from collections import OrderedDict
 
 class Roman:
+#        valid_symbol = {"I":1,"V":5,"X":10,"L":50,"C":100,"D":500,"M":1000}
+
+    valid_symbol = OrderedDict()
+    valid_symbol["I"] = 1
+    valid_symbol["V"] = 5
+    valid_symbol["X"] = 10
+    valid_symbol["L"] = 50
+    valid_symbol["C"] = 100
+    valid_symbol["D"] = 500
+    valid_symbol["M"] = 1000
+
     def __init__(self, value):
-#        self.valid_symbol = {"I":1,"V":5,"X":10,"L":50,"C":100,"D":500,"M":1000}
-        self.valid_symbol = OrderedDict()
-        self.valid_symbol["I"] = 1
-        self.valid_symbol["V"] = 5
-        self.valid_symbol["X"] = 10
-        self.valid_symbol["L"] = 50
-        self.valid_symbol["C"] = 100
-        self.valid_symbol["D"] = 500
-        self.valid_symbol["M"] = 1000
+
         if type(value) is str:
             self.roman = value
             self.numeric = self.roman_to_numeric(value)
@@ -50,7 +53,7 @@ class Roman:
 
     def validate_value(self,value):
         for i,elem in enumerate(value):
-            if elem not in self.valid_symbol.keys():
+            if elem not in Roman.valid_symbol.keys():
                 raise ValueError("Not a valid roman number, contain invalid symbol")
             if elem in ["I","X","C"]:
                 if i >= len(value)-3:
@@ -69,21 +72,21 @@ class Roman:
         temp_val = 0
         for i, c in enumerate(value):
             if i == len(value)-1:
-                num+=self.valid_symbol[c]
+                num+=Roman.valid_symbol[c]
             elif value[i+1] == c:
-                temp_val+=self.valid_symbol[c]
-            elif self.valid_symbol[value[i+1]]>self.valid_symbol[c]:
-                temp_val += self.valid_symbol[c]
+                temp_val+=Roman.valid_symbol[c]
+            elif Roman.valid_symbol[value[i+1]]>Roman.valid_symbol[c]:
+                temp_val += Roman.valid_symbol[c]
                 num-=temp_val
                 temp_val = 0
             else:
-                num+=self.valid_symbol[c]
+                num+=Roman.valid_symbol[c]
         num+=temp_val
         return num
 
     def compute_roman(self,value,symbol):
         roman = ""
-        v_symbol = self.valid_symbol[symbol]
+        v_symbol = Roman.valid_symbol[symbol]
         val = value
         if val >= v_symbol:
             val-= v_symbol
@@ -91,26 +94,26 @@ class Roman:
             while val>= v_symbol:
                 val-= v_symbol
                 roman+= symbol
-        if symbol in ["M","C","X"] and val >= 9*self.valid_symbol[symbol]/10:
-            l = list(self.valid_symbol.keys())
+        if symbol in ["M","C","X"] and val >= 9*Roman.valid_symbol[symbol]/10:
+            l = list(Roman.valid_symbol.keys())
             i = l.index(symbol)
             before = l[i-2]
             roman+= before
             roman+= symbol
-            val -= 9*self.valid_symbol[before]
-        if symbol in ["D","L","V"] and val >= 4*self.valid_symbol[symbol]/5:
-            l = list(self.valid_symbol.keys())
+            val -= 9*Roman.valid_symbol[before]
+        if symbol in ["D","L","V"] and val >= 4*Roman.valid_symbol[symbol]/5:
+            l = list(Roman.valid_symbol.keys())
             i = l.index(symbol)
             before = l[i-1]
             roman+= before
             roman+= symbol
-            val -= 4*self.valid_symbol[before]
+            val -= 4*Roman.valid_symbol[before]
         return roman,val
 
     def numeric_to_roman(self,value):
         r = ""
         val = value
-        for elem in reversed(self.valid_symbol.keys()):
+        for elem in reversed(Roman.valid_symbol.keys()):
             roman,val = self.compute_roman(val,elem)
             r+= roman
         return r
@@ -122,7 +125,7 @@ class Roman:
 # MMDX
 # 2019
 # MMXIX
-testN1 = Roman(9999)
+testN1 = Roman(123)
 print(testN1)
 
 
