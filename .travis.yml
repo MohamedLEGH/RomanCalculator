@@ -1,0 +1,9 @@
+language: python
+python:
+  - "3"
+# command to install dependencies
+install:
+  - pip install pytest pytest-cov
+# command to run tests
+script:
+  - py.test --cov=. .

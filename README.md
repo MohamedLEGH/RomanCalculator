@@ -4,7 +4,7 @@
 ## Install
 ```
 (need python3)
-pip install pytest
+pip install pytest pytest-cov
 git clone https://github.com/MohamedLEGH/RomanCalculator
 cd RomanCalculator
 ```
@@ -35,6 +35,6 @@ True
 ## Test
 
 ```
-py.test .
+py.test --cov=. .
 ```
 
