@@ -1,5 +1,5 @@
 [![Build Status](https://travis-ci.org/MohamedLEGH/RomanCalculator.svg?branch=master)](https://travis-ci.org/MohamedLEGH/RomanCalculator)
-
+[![Coverage Status](https://coveralls.io/repos/github/MohamedLEGH/RomanCalculator/badge.svg?branch=master)](https://coveralls.io/github/MohamedLEGH/RomanCalculator?branch=master)
 
 # RomanCalculator
 
