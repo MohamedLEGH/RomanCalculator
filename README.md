@@ -1,5 +1,6 @@
 # RomanCalculator
 
+based on code kana : http://codingdojo.org/kata/RomanCalculator/
 
 ## Install
 ```
