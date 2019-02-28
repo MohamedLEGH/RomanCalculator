@@ -21,7 +21,7 @@ cd RomanCalculator
 >>> print(a)
 (II,2)
 >>> print(a.roman)
-2
+II
 >>> print(a.numeric)
 2
 >>> print(a+a)
