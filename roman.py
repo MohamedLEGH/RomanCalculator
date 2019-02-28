@@ -93,6 +93,11 @@ class Roman:
                     raise ValueError("Not a valid roman number, contain more than one time the symbol '" + elem +"' consecutively")
 
     def roman_to_numeric(self,value):
+        """
+        Convert a roman number to it's numerical value
+        Add the value of each roman symbol to the number to compute the numerical value of a roman number
+        Subtract when a lower symbol is before a greater one (for exemple IV = V - I = 5 - 1 = 4
+        """
         self.validate_value(value)
         num = 0
         temp_val = 0
@@ -113,6 +118,12 @@ class Roman:
         return num
 
     def compute_roman(self,value,symbol):
+        """
+        Convert a roman symbol to it's numerical value
+        for each roman symbol (beggining with M, the bigger one)
+        we go through the string of the roman number and we add the value of the symbol 
+        until there is another symbol. There is special case for substract cases.
+        """
         roman = ""
         v_symbol = Roman.valid_symbol[symbol]
         val = value
@@ -145,6 +156,4 @@ class Roman:
             roman,val = self.compute_roman(val,elem)
             r+= roman
         return r
-
-#if __name__ == "__main__":
 
