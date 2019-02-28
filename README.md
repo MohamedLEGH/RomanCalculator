@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/MohamedLEGH/RomanCalculator.svg?branch=master)](https://travis-ci.org/MohamedLEGH/RomanCalculator)
+
+
 # RomanCalculator
 
 based on code kana : http://codingdojo.org/kata/RomanCalculator/
