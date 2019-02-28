@@ -3,7 +3,7 @@
 
 # RomanCalculator
 
-based on code kana : http://codingdojo.org/kata/RomanCalculator/
+based on code kata : http://codingdojo.org/kata/RomanCalculator/
 
 ## Install
 ```
